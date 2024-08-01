@@ -22,8 +22,8 @@ class MainActivity : ComponentActivity() {
             NavHost(
                 navController = navController,
                 startDestination = Routes.TODO_LIST
-            ){
-                composable(Routes.TODO_LIST){
+            ) {
+                composable(Routes.TODO_LIST) {
                     TodoListScreen(
                         onNavigate = {
                             navController.navigate(it.route)
@@ -31,19 +31,20 @@ class MainActivity : ComponentActivity() {
                     )
                 }
                 composable(
-                    route = Routes.ADD_EDIT_TODO + "?todoId = {todoId}",
+                    route = Routes.ADD_EDIT_TODO + "?todoId={todoId}",
                     arguments = listOf(
-                        navArgument(name = "todoId"){
+                        navArgument(name = "todoId") {
                             type = NavType.IntType
                             defaultValue = -1
                         }
                     )
-                ){
+                ) {
                     AddEditTodoScreen(onPopBackStack = {
                         navController.popBackStack()
                     })
                 }
             }
+
         }
     }
 
