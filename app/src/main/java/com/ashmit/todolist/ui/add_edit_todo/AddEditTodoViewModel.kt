@@ -40,7 +40,6 @@ class AddEditTodoViewModel @Inject constructor(
                     title = todo.title
                     description = todo.description?: ""
                     this@AddEditTodoViewModel .todo = todo
-                    this@AddEditTodoViewModel.todo
 
                 }
             }
