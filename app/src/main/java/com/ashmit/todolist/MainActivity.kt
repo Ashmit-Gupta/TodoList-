@@ -17,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        android.util.Log.d("DEBUG", "AddEditTodoScreen Composed")
         setContent {
             val navController = rememberNavController()
             NavHost(
@@ -40,12 +41,11 @@ class MainActivity : ComponentActivity() {
                     )
                 ) {
                     AddEditTodoScreen(onPopBackStack = {
-                        navController.popBackStack()
+                        android.util.Log.d("DEBUG", "Navigating back using popBackStack")
+                        navController.popBackStack() // Ensure this is executed
                     })
                 }
             }
-
         }
     }
-
 }

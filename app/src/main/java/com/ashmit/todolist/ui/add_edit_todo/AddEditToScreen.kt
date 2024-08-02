@@ -1,5 +1,7 @@
 package com.ashmit.todolist.ui.add_edit_todo
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
@@ -9,6 +11,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ashmit.todolist.util.UiEvent
@@ -18,22 +21,28 @@ import kotlinx.coroutines.launch
 fun AddEditTodoScreen(onPopBackStack: () -> Unit, viewModel: AddEditTodoViewModel = hiltViewModel()) {
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
-
+    val context = LocalContext.current
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
+            Log.d("DEBUG" ,"event is : ${event.toString()}" )
             when (event) {
-                is UiEvent.Navigate -> onPopBackStack()
+                is UiEvent.Navigate -> null
+
                 is UiEvent.ShowSnackBar -> {
-                    scope.launch {
-                        snackbarHostState.showSnackbar(
-                            message = event.message,
-                            actionLabel = event.action
-                        )
-                    }
+//                    scope.launch {
+//                        Log.d("DEBUG", "ShowSnackBar event received")
+//                        snackbarHostState.showSnackbar(
+//                            message = "Event ka msg or kya , ke hi kaar le ?",
+//                            actionLabel = "Water Slide"
+//                        )
+//                    }
                 }
-                else -> Unit
+                // the UiEvent.PopBackStack is only working as i have only passed the UiEvent.sent(UieEvent.popBackStack) only so the other wold nt work , the other are for only completion of the task
+                is UiEvent.PopBackStack -> onPopBackStack()
             }
+
         }
+
     }
 
     Scaffold(
