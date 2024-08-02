@@ -36,7 +36,6 @@ class AddEditTodoViewModel @Inject constructor(
         if(todoId != -1){
             viewModelScope.launch {
                 repository.getTodoById(todoId!!)?.let{todo-> //TODO chances of error
-//                    title = todo.title
                     title = todo.title
                     description = todo.description?: ""
                     this@AddEditTodoViewModel .todo = todo
@@ -70,7 +69,9 @@ class AddEditTodoViewModel @Inject constructor(
                             id = todo?.id
                         )
                     )
-                    sendUiEvent(UiEvent.PopBackStack)
+                    sendUiEvent(UiEvent.PopBackStack)// only sending the popBAckStack rather than everything
+//                    sendUiEvent(UiEvent.Navigate)
+//                    sendUiEvent(UiEvent.ShowSnackBar)
                 }
             }
         }

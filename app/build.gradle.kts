@@ -14,7 +14,7 @@ android {
     defaultConfig {
         applicationId = "com.ashmit.todolist"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -61,6 +61,7 @@ dependencies {
 
     //Dagger Hilt
     implementation("com.google.dagger:hilt-android:2.51.1")
+    implementation(libs.androidx.media3.common)
     kapt("com.google.dagger:hilt-compiler:2.51.1")
     kapt("androidx.hilt:hilt-compiler:1.2.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0") // it is for integrating Hilt with Jetpack Compose navigation.
