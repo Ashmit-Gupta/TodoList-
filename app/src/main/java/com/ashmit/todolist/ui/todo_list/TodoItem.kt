@@ -16,9 +16,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ashmit.todolist.data.Todo
+import com.ashmit.todolist.data.TodoRepository
+import com.ashmit.todolist.data.TodoRepositoryImpl
 
 @Composable
 fun TodoItem(
@@ -62,4 +65,22 @@ fun TodoItem(
                 onEvent(TodoListEvent.OnDoneChange(todo , isChecked))
             })
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewTodoItems(){
+    val sampleTodo = Todo(
+        id =1,
+        title = "SampleTodo",
+        description = "This is the sample Description !!",
+        isDone = true
+    )
+
+    TodoItem(
+        todo = sampleTodo,
+        onEvent = {
+            null
+        }
+    )
 }

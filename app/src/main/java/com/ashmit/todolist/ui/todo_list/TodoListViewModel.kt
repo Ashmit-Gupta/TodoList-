@@ -1,5 +1,7 @@
 package com.ashmit.todolist.ui.todo_list
 
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDuration
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ashmit.todolist.data.Todo
@@ -24,6 +26,7 @@ Why Use a Channel?
 Channels are used here to send one-time UI events, like showing a snackbar or navigating to another screen. These events should only be handled once, so they are not suitable for LiveData or a StateFlow, which are used for state that should be observed continuously.*/
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
+
     private var deletedTodo : Todo? = null
     fun onEvent(event : TodoListEvent){
         when(event){
@@ -34,20 +37,23 @@ Channels are used here to send one-time UI events, like showing a snackbar or na
                 sendUiEvent(UiEvent.Navigate(Routes.ADD_EDIT_TODO))
             }
 
+            //it needs uiEvent i.e a SnackBar to show the undo
             is TodoListEvent.OnDeleteTodoClick -> {
                 viewModelScope.launch {
                     deletedTodo = event.todo
                     repository.deleteTodo(event.todo)
+                    //todo add a timer
                     sendUiEvent(
                         UiEvent.ShowSnackBar(
                         message = "Todo deleted",
-                        action = "Undo"
+                        action = "Undo",
                     ))
                 }
             }
             is TodoListEvent.OnDoneChange -> {
                 viewModelScope.launch {
                     repository.insertTodo(
+                        //it will copy the existing to-do and then update only the isDone adn then send it to the repo that has insert which if the to-do given has the same id or already exists  then it will update as we have given it in the dao
                         event.todo.copy(
                             isDone = event.isDone
                         )

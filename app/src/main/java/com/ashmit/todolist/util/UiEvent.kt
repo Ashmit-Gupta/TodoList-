@@ -1,5 +1,7 @@
 package com.ashmit.todolist.util
 
+import androidx.compose.material3.SnackbarDuration
+
 /*A sealed class in Kotlin is a special kind of class that allows you to define a restricted hierarchy of classes. All subclasses of a sealed class are known at compile-time, which makes it easier to manage and handle different types of events or states in your code.
 
 Why Sealed Classes for UI Events?
@@ -8,11 +10,12 @@ UI events are finite, meaning there are only certain actions a user can take (e.
 */
 
 sealed class UiEvent {
-    object PopBackStack : UiEvent()// all the subclass will inherit or extend the UiEvent class
+    object  PopBackStack : UiEvent()// all the subclass will inherit or extend the UiEvent class
     data class Navigate(val route :String): UiEvent()
     data class ShowSnackBar(
         val message :String,
-        val action :String? = null
+        val action :String? = null,
+        val duration : SnackbarDuration = SnackbarDuration.Short
         ): UiEvent()
 }
 
