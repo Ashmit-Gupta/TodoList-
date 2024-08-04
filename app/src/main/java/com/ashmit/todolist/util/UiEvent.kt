@@ -15,7 +15,7 @@ sealed class UiEvent {
     data class ShowSnackBar(
         val message :String,
         val action :String? = null,
-        val duration : SnackbarDuration = SnackbarDuration.Short
+        val duration:SnackbarDuration
         ): UiEvent()
 }
 

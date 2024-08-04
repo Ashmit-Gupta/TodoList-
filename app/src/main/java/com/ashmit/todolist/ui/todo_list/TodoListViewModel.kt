@@ -1,6 +1,5 @@
 package com.ashmit.todolist.ui.todo_list
 
-import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarDuration
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -46,8 +45,8 @@ Channels are used here to send one-time UI events, like showing a snackbar or na
                     sendUiEvent(
                         UiEvent.ShowSnackBar(
                         message = "Todo deleted",
-                        action = "Undo",
-                    ))
+                        action = "Undo", 
+                        duration = SnackbarDuration.Short))
                 }
             }
             is TodoListEvent.OnDoneChange -> {
