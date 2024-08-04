@@ -1,5 +1,6 @@
 package com.ashmit.todolist.ui.add_edit_todo
 
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -57,7 +58,8 @@ class AddEditTodoViewModel @Inject constructor(
                     if(title.isBlank()){
                         sendUiEvent(
                             UiEvent.ShowSnackBar(
-                            message = "The title Cant be Empty"
+                            message = "The title Cant be Empty",
+                                duration = SnackbarDuration.Short
                         ))
                         return@launch
                     }
